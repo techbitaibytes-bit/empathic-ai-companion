@@ -15,70 +15,44 @@ export const Route = createFileRoute("/sanctuary/crisis")({
 type SupportItem = {
   name: string;
   type: string;
-  contact: string;
+  phone: string;
+  website: string;
   description: string;
 };
 
-function parseResourceCards(raw: string): SupportItem[] {
-  const blocks = raw
-    .split(/\n(?=\d+\.|\*\*[A-Z])/)
-    .map((block) => block.trim())
-    .filter(Boolean);
-
-  return blocks.map((block) => {
-    const nameMatch = block.match(/\*\*([^*]+)\*\*/);
-    const name = nameMatch ? nameMatch[1].trim() : "Support Resource";
-    const phoneMatch = block.match(/\(?\d{3}\)?[\s.-]\d{3}[\s.-]\d{4}/);
-    const phone = phoneMatch ? phoneMatch[0] : "";
-    const typeMatch = block.match(/\*\*[^*]+\*\*,?\s*([^,(]+)/);
-    const type = typeMatch ? typeMatch[1].trim() : "";
-    const description = block
-      .replace(/\*\*/g, "")
-      .replace(/^\d+\.\s*/, "")
-      .replace(nameMatch?.[0] ?? "", "")
-      .replace(phone, "")
-      .trim()
-      .split(".")
-      .find((segment) => segment.length > 30) ?? "";
-
-    return { name, type, contact: phone, description };
-  });
+function extractJsonArray(raw: string): SupportItem[] {
+  // Find first '[' and last ']' to isolate JSON even if model adds prose/code fences.
+  const start = raw.indexOf("[");
+  const end = raw.lastIndexOf("]");
+  if (start === -1 || end === -1 || end <= start) return [];
+  const slice = raw.slice(start, end + 1);
+  try {
+    const arr = JSON.parse(slice);
+    if (!Array.isArray(arr)) return [];
+    return arr
+      .map((r: any): SupportItem => ({
+        name: String(r?.name ?? "").trim(),
+        type: String(r?.type ?? "").trim(),
+        phone: String(r?.phone ?? "").trim(),
+        website: String(r?.website ?? "").trim(),
+        description: String(r?.description ?? "").trim(),
+      }))
+      .filter((r) => r.name && (r.phone || r.website));
+  } catch {
+    return [];
+  }
 }
 
 const SUPPORT_ICON_MAP: Record<string, ComponentType<{ className?: string }>> = {
   hotline: Phone,
+  crisis: Phone,
+  text: MessageSquare,
   counseling: Users,
   group: Users,
   online: Globe,
   lgbtq: Link2,
   default: MapPin,
 };
-
-function parseSupportItems(text: string): SupportItem[] {
-  return text
-    .split(/\n{2,}/)
-    .map((block) => block.trim())
-    .filter(Boolean)
-    .map((block) => {
-      const item: SupportItem = { name: "Unknown", type: "Unknown", contact: "", description: "" };
-      block.split(/\n/).forEach((line) => {
-        const parts = line.split(/:\s+/);
-        if (parts.length < 2) return;
-        const key = parts[0].trim().toLowerCase();
-        const value = parts.slice(1).join(": ").trim();
-        if (key.includes("name")) item.name = value;
-        else if (key.includes("type")) item.type = value;
-        else if (key.includes("contact")) item.contact = value;
-        else if (!item.description) item.description = value;
-        else item.description += ` ${value}`;
-      });
-      if (!item.description) {
-        const lines = block.split(/\n/).map((line) => line.trim()).filter(Boolean);
-        if (lines.length > 1) item.description = lines.slice(1).join(" ");
-      }
-      return item;
-    });
-}
 
 function CrisisPage() {
   const [city, setCity] = useState("");

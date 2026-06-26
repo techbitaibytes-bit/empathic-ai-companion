@@ -255,23 +255,43 @@ Output JUST the JSON array, starting with [ and ending with ].`;
                   {supportItems.map((item, index) => {
                     const Icon = iconForType(item.type);
                     return (
-                      <div key={`${item.name}-${index}`} className="rounded-2xl glass px-4 py-3 flex flex-col gap-1">
+                      <div key={`${item.name}-${index}`} className="rounded-2xl glass px-4 py-3">
                         <div className="flex items-start gap-3">
                           <Icon className="h-5 w-5 text-accent shrink-0 mt-0.5" />
-                          <div className="flex-1">
+                          <div className="flex-1 min-w-0">
                             <div className="font-semibold text-sm">{item.name}</div>
                             {item.type && <div className="text-xs text-accent">{item.type}</div>}
                             {item.description && (
-                              <div className="text-xs text-muted-foreground line-clamp-2">{item.description}</div>
+                              <div className="mt-1 text-xs text-muted-foreground">{item.description}</div>
                             )}
-                            {item.contact && (
-                              <a
-                                href={`tel:${item.contact.replace(/\D/g, "")}`}
-                                className="mt-1 text-xs font-mono text-accent hover:underline"
-                              >
-                                📞 {item.contact}
-                              </a>
-                            )}
+                            <div className="mt-2 flex flex-wrap gap-2">
+                              {item.phone && (
+                                <a
+                                  href={`tel:${item.phone.replace(/[^\d+]/g, "")}`}
+                                  className="inline-flex items-center gap-1.5 rounded-full bg-accent/15 px-3 py-1 text-xs font-mono text-accent hover:bg-accent/25 transition"
+                                >
+                                  <Phone className="h-3 w-3" /> {item.phone}
+                                </a>
+                              )}
+                              {item.website && (
+                                <a
+                                  href={item.website}
+                                  target="_blank"
+                                  rel="noreferrer"
+                                  className="inline-flex items-center gap-1.5 rounded-full bg-white/10 px-3 py-1 text-xs hover:bg-white/15 transition"
+                                >
+                                  <Globe className="h-3 w-3" /> Visit site
+                                </a>
+                              )}
+                              {item.phone && (
+                                <button
+                                  onClick={() => copyToClipboard(item.phone)}
+                                  className="inline-flex items-center gap-1.5 rounded-full bg-white/5 px-3 py-1 text-xs hover:bg-white/10 transition"
+                                >
+                                  Copy number
+                                </button>
+                              )}
+                            </div>
                           </div>
                         </div>
                       </div>

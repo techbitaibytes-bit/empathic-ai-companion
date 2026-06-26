@@ -11,9 +11,9 @@ export function VoiceOrb({ state, voiceName, onStop }: VoiceOrbProps) {
     speaking: {
       scale: [0.8, 1.3],
       opacity: [0.45, 0],
-      transition: { duration: 1.4, repeat: Infinity, ease: "easeOut" },
+      transition: { duration: 1.4, repeat: Infinity, ease: "easeOut" as const },
     },
-  };
+  } as const;
 
   const glowColors = {
     idle: "bg-gradient-to-br from-violet-500/40 via-slate-900 to-cyan-400/30",

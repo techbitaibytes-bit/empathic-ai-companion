@@ -11,7 +11,16 @@ import { useLocalStorage, STORAGE_KEYS } from "@/lib/storage";
 import { cn } from "@/lib/utils";
 
 export const Route = createFileRoute("/sanctuary/toolkit")({
-  head: () => ({ meta: [{ title: "Healing Toolkit — EmpathAI" }] }),
+  head: () => ({
+    meta: [
+      { title: "Healing Toolkit — Breathing, Grounding & Task Help | EmpathAI" },
+      { name: "description", content: "A pocket toolkit of grounding, box breathing, gratitude, affirmations, body scans, and ADHD-friendly task breakdowns — built for real moments." },
+      { property: "og:title", content: "Healing Toolkit — EmpathAI" },
+      { property: "og:description", content: "Grounding, breathing, affirmations, and task-breakdown tools for teens and young adults." },
+      { property: "og:url", content: "https://friendlypal.lovable.app/sanctuary/toolkit" },
+    ],
+    links: [{ rel: "canonical", href: "https://friendlypal.lovable.app/sanctuary/toolkit" }],
+  }),
   component: ToolkitPage,
 });
 

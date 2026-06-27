@@ -311,10 +311,13 @@ function ChatPage() {
           method: "POST",
           headers: { "content-type": "application/json" },
           body: JSON.stringify({
+            preset: "chat",
+            modeId,
+            neuroMode,
+            simpleLanguage: simpleMode || simpleLanguageMode,
             messages: next
               .filter((m) => m.id !== assistantId)
               .map(({ role, content }) => ({ role, content })),
-            systemPrompt: getCombinedSystemPrompt(getMode(modeId), neuroMode, simpleMode || simpleLanguageMode),
             recentMood,
             userName: user?.name,
           }),

@@ -154,7 +154,7 @@ export const Route = createFileRoute("/api/chat")({
   server: {
     handlers: {
       POST: async ({ request }) => {
-        const apiKey = process.env.VITE_GROQ_API_KEY ?? process.env.GROQ_API_KEY;
+        const apiKey = process.env.GROQ_API_KEY;
         if (!apiKey) {
           return new Response(
             JSON.stringify({ error: "Missing GROQ_API_KEY on the server." }),

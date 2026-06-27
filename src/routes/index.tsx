@@ -79,8 +79,10 @@ function Landing() {
             </div>
           </motion.div>
 
-          <div className="mt-20 grid grid-cols-1 sm:grid-cols-3 gap-4 w-full max-w-5xl">
-            {[
+          <div className="mt-20 w-full max-w-5xl">
+            <h2 className="text-2xl sm:text-3xl font-semibold tracking-tight text-center mb-8">What's inside the sanctuary</h2>
+            <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
+              {[
               { icon: Heart, title: "Six gentle modes", body: "Switch between listener, coach, reflective, and caring support styles without losing the thread of the conversation." },
               { icon: Eye, title: "Mood Mirror", body: "Optional, on-device emotion sensing from your webcam with no uploads and a calm, private readout." },
               { icon: Sparkles, title: "Healing toolkit", body: "Body doubling, task breakdown, grounding, breathing, and soft affirmations built for real moments." },

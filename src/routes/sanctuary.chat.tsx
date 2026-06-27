@@ -10,7 +10,7 @@ import { GlowButton } from "@/components/GlowButton";
 import { ModeChips } from "@/components/ModeChips";
 import { MoodLogger } from "@/components/MoodLogger";
 import { AnimatedBackground } from "@/components/AnimatedBackground";
-import { MODES, getMode, getCombinedSystemPrompt, type ModeId } from "@/lib/modes";
+import { MODES, getMode, type ModeId } from "@/lib/modes";
 import { useLocalStorage, STORAGE_KEYS, type ChatMessage, type MoodEntry, type UserData, type ChatSession } from "@/lib/storage";
 import { cn } from "@/lib/utils";
 

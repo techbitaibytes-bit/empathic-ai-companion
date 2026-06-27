@@ -15,7 +15,16 @@ import { useLocalStorage, STORAGE_KEYS, type ChatMessage, type MoodEntry, type U
 import { cn } from "@/lib/utils";
 
 export const Route = createFileRoute("/sanctuary/chat")({
-  head: () => ({ meta: [{ title: "Chat — EmpathAI Sanctuary" }] }),
+  head: () => ({
+    meta: [
+      { title: "Chat — EmpathAI Sanctuary" },
+      { name: "description", content: "Warm, private AI chat with six gentle support modes — listener, coach, CBT guide, friend, therapist-style, reflective. Built for teens." },
+      { property: "og:title", content: "Chat — EmpathAI Sanctuary" },
+      { property: "og:description", content: "Private AI chat companion with multiple support modes for teens and young adults." },
+      { property: "og:url", content: "https://friendlypal.lovable.app/sanctuary/chat" },
+    ],
+    links: [{ rel: "canonical", href: "https://friendlypal.lovable.app/sanctuary/chat" }],
+  }),
   component: ChatPage,
 });
 

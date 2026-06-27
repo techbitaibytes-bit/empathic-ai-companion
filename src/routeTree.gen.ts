@@ -9,6 +9,7 @@
 // Additionally, you should also exclude this file from your linter and/or formatter to prevent it from being checked or modified.
 
 import { Route as rootRouteImport } from './routes/__root'
+import { Route as SitemapDotxmlRouteImport } from './routes/sitemap[.]xml'
 import { Route as SanctuaryRouteImport } from './routes/sanctuary'
 import { Route as IndexRouteImport } from './routes/index'
 import { Route as SanctuaryToolkitRouteImport } from './routes/sanctuary.toolkit'
@@ -18,6 +19,11 @@ import { Route as SanctuaryCrisisRouteImport } from './routes/sanctuary.crisis'
 import { Route as SanctuaryChatRouteImport } from './routes/sanctuary.chat'
 import { Route as ApiChatRouteImport } from './routes/api/chat'
 
+const SitemapDotxmlRoute = SitemapDotxmlRouteImport.update({
+  id: '/sitemap.xml',
+  path: '/sitemap.xml',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const SanctuaryRoute = SanctuaryRouteImport.update({
   id: '/sanctuary',
   path: '/sanctuary',
@@ -62,6 +68,7 @@ const ApiChatRoute = ApiChatRouteImport.update({
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
   '/sanctuary': typeof SanctuaryRouteWithChildren
+  '/sitemap.xml': typeof SitemapDotxmlRoute
   '/api/chat': typeof ApiChatRoute
   '/sanctuary/chat': typeof SanctuaryChatRoute
   '/sanctuary/crisis': typeof SanctuaryCrisisRoute
@@ -72,6 +79,7 @@ export interface FileRoutesByFullPath {
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
   '/sanctuary': typeof SanctuaryRouteWithChildren
+  '/sitemap.xml': typeof SitemapDotxmlRoute
   '/api/chat': typeof ApiChatRoute
   '/sanctuary/chat': typeof SanctuaryChatRoute
   '/sanctuary/crisis': typeof SanctuaryCrisisRoute
@@ -83,6 +91,7 @@ export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
   '/sanctuary': typeof SanctuaryRouteWithChildren
+  '/sitemap.xml': typeof SitemapDotxmlRoute
   '/api/chat': typeof ApiChatRoute
   '/sanctuary/chat': typeof SanctuaryChatRoute
   '/sanctuary/crisis': typeof SanctuaryCrisisRoute
@@ -95,6 +104,7 @@ export interface FileRouteTypes {
   fullPaths:
     | '/'
     | '/sanctuary'
+    | '/sitemap.xml'
     | '/api/chat'
     | '/sanctuary/chat'
     | '/sanctuary/crisis'
@@ -105,6 +115,7 @@ export interface FileRouteTypes {
   to:
     | '/'
     | '/sanctuary'
+    | '/sitemap.xml'
     | '/api/chat'
     | '/sanctuary/chat'
     | '/sanctuary/crisis'
@@ -115,6 +126,7 @@ export interface FileRouteTypes {
     | '__root__'
     | '/'
     | '/sanctuary'
+    | '/sitemap.xml'
     | '/api/chat'
     | '/sanctuary/chat'
     | '/sanctuary/crisis'
@@ -126,11 +138,19 @@ export interface FileRouteTypes {
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
   SanctuaryRoute: typeof SanctuaryRouteWithChildren
+  SitemapDotxmlRoute: typeof SitemapDotxmlRoute
   ApiChatRoute: typeof ApiChatRoute
 }
 
 declare module '@tanstack/react-router' {
   interface FileRoutesByPath {
+    '/sitemap.xml': {
+      id: '/sitemap.xml'
+      path: '/sitemap.xml'
+      fullPath: '/sitemap.xml'
+      preLoaderRoute: typeof SitemapDotxmlRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/sanctuary': {
       id: '/sanctuary'
       path: '/sanctuary'
@@ -213,6 +233,7 @@ const SanctuaryRouteWithChildren = SanctuaryRoute._addFileChildren(
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
   SanctuaryRoute: SanctuaryRouteWithChildren,
+  SitemapDotxmlRoute: SitemapDotxmlRoute,
   ApiChatRoute: ApiChatRoute,
 }
 export const routeTree = rootRouteImport

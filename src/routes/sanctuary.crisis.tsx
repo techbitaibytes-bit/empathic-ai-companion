@@ -8,7 +8,16 @@ import { GlowButton } from "@/components/GlowButton";
 import { AnimatedBackground } from "@/components/AnimatedBackground";
 
 export const Route = createFileRoute("/sanctuary/crisis")({
-  head: () => ({ meta: [{ title: "Crisis Help — EmpathAI" }] }),
+  head: () => ({
+    meta: [
+      { title: "Crisis Help & Local Support — EmpathAI" },
+      { name: "description", content: "Immediate crisis hotlines (988, Crisis Text Line, iCall India) plus an AI-powered locator for nearby teen-friendly mental health resources." },
+      { property: "og:title", content: "Crisis Help & Local Support — EmpathAI" },
+      { property: "og:description", content: "Crisis hotlines and a locator for nearby teen mental health support." },
+      { property: "og:url", content: "https://friendlypal.lovable.app/sanctuary/crisis" },
+    ],
+    links: [{ rel: "canonical", href: "https://friendlypal.lovable.app/sanctuary/crisis" }],
+  }),
   component: CrisisPage,
 });
 

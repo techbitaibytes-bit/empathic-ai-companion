@@ -310,11 +310,10 @@ function TaskBreakdown() {
     setLoading(true);
     setResponse(null);
     try {
-      const prompt = `Break this task into a clear list of tiny micro-steps: ${task.trim()}`;
       const res = await fetch("/api/chat", {
         method: "POST",
         headers: { "content-type": "application/json" },
-        body: JSON.stringify({ messages: [{ role: "user", content: prompt }], systemPrompt: "You are a calm helper. Turn the task into a numbered list of small, doable steps." }),
+        body: JSON.stringify({ preset: "task-breakdown", task: task.trim() }),
       });
       if (!res.ok || !res.body) throw new Error("AI error");
       const reader = res.body.getReader();

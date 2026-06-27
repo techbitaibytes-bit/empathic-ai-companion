@@ -79,28 +79,21 @@ function CrisisPage() {
     const ctrl = new AbortController();
     abortRef.current = ctrl;
 
-    const prompt = `You are a resource locator. The user is in "${q}" and is a teen/young adult seeking mental health and neurodiverse support.
-
-Return ONLY a valid JSON array (no prose, no markdown, no code fences) of 5-8 REAL, well-known resources serving that location. Prefer national crisis lines that work for that country + reputable youth/LGBTQ+/neurodiverse services. Do NOT invent organizations or numbers. If unsure of a local org, use a verified national one for that country.
-
-Each item must be an object with EXACTLY these keys:
-{
-  "name": "Organization name",
-  "type": "Crisis Hotline | Text Line | Counseling | Support Group | Online | LGBTQ+",
-  "phone": "Exact dialable number with country code if international, or empty string",
-  "website": "https://... or empty string",
-  "description": "One short warm sentence (max 20 words) about what they offer."
-}
-
-Output JUST the JSON array, starting with [ and ending with ].`;
+    // Client-side sanitize: strip control chars, collapse whitespace, cap length.
+    // The server re-sanitizes and treats this as data (not instructions).
+    const safeLocation = q
+      .replace(/[\u0000-\u001F\u007F]+/g, " ")
+      .replace(/\s+/g, " ")
+      .trim()
+      .slice(0, 80);
 
     try {
       const res = await fetch("/api/chat", {
         method: "POST",
         headers: { "content-type": "application/json" },
         body: JSON.stringify({
-          messages: [{ role: "user", content: prompt }],
-          systemPrompt: "You output only valid JSON when asked. Never wrap in markdown or add commentary.",
+          preset: "crisis-locator",
+          location: safeLocation,
         }),
         signal: ctrl.signal,
       });

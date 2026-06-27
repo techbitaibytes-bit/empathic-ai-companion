@@ -101,7 +101,8 @@ function Landing() {
                   <p className="mt-2 text-sm text-muted-foreground leading-relaxed">{b.body}</p>
                 </GlassCard>
               </motion.div>
-            ))}
+              ))}
+            </div>
           </div>
         </section>
 

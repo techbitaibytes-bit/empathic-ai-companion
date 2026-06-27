@@ -9,7 +9,16 @@ import { useLocalStorage, STORAGE_KEYS, type MoodEntry } from "@/lib/storage";
 import { MoodSparkline } from "@/components/MoodLogger";
 
 export const Route = createFileRoute("/sanctuary/insights")({
-  head: () => ({ meta: [{ title: "Insights — EmpathAI" }] }),
+  head: () => ({
+    meta: [
+      { title: "Mood Insights — Your Private Emotional Trends | EmpathAI" },
+      { name: "description", content: "See gentle, private trends from your mood log. All data is stored only in your browser and never sent to a server." },
+      { property: "og:title", content: "Mood Insights — EmpathAI" },
+      { property: "og:description", content: "Private, browser-only mood trends and weekly emotional patterns." },
+      { property: "og:url", content: "https://friendlypal.lovable.app/sanctuary/insights" },
+    ],
+    links: [{ rel: "canonical", href: "https://friendlypal.lovable.app/sanctuary/insights" }],
+  }),
   component: InsightsPage,
 });
 

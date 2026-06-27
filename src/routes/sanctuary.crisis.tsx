@@ -28,7 +28,16 @@ type SupportItem = {
   website: string;
   description: string;
 };
-
+// Only allow https:// URLs from AI-generated content.
+// Blocks javascript:, data:, http:, and any other scheme.
+function safeHref(url: string): string {
+  try {
+    const parsed = new URL(url);
+    return parsed.protocol === "https:" ? url : "#";
+  } catch {
+    return "#";
+  }
+}
 function extractJsonArray(raw: string): SupportItem[] {
   // Find first '[' and last ']' to isolate JSON even if model adds prose/code fences.
   const start = raw.indexOf("[");
@@ -277,7 +286,7 @@ function CrisisPage() {
                               )}
                               {item.website && (
                                 <a
-                                  href={item.website}
+                                 href={safeHref(item.website)}
                                   target="_blank"
                                   rel="noreferrer"
                                   className="inline-flex items-center gap-1.5 rounded-full bg-white/10 px-3 py-1 text-xs hover:bg-white/15 transition"

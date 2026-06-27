@@ -10,12 +10,21 @@ import { GlowButton } from "@/components/GlowButton";
 import { ModeChips } from "@/components/ModeChips";
 import { MoodLogger } from "@/components/MoodLogger";
 import { AnimatedBackground } from "@/components/AnimatedBackground";
-import { MODES, getMode, getCombinedSystemPrompt, type ModeId } from "@/lib/modes";
+import { MODES, getMode, type ModeId } from "@/lib/modes";
 import { useLocalStorage, STORAGE_KEYS, type ChatMessage, type MoodEntry, type UserData, type ChatSession } from "@/lib/storage";
 import { cn } from "@/lib/utils";
 
 export const Route = createFileRoute("/sanctuary/chat")({
-  head: () => ({ meta: [{ title: "Chat — EmpathAI Sanctuary" }] }),
+  head: () => ({
+    meta: [
+      { title: "Chat — EmpathAI Sanctuary" },
+      { name: "description", content: "Warm, private AI chat with six gentle support modes — listener, coach, CBT guide, friend, therapist-style, reflective. Built for teens." },
+      { property: "og:title", content: "Chat — EmpathAI Sanctuary" },
+      { property: "og:description", content: "Private AI chat companion with multiple support modes for teens and young adults." },
+      { property: "og:url", content: "https://friendlypal.lovable.app/sanctuary/chat" },
+    ],
+    links: [{ rel: "canonical", href: "https://friendlypal.lovable.app/sanctuary/chat" }],
+  }),
   component: ChatPage,
 });
 
@@ -311,10 +320,13 @@ function ChatPage() {
           method: "POST",
           headers: { "content-type": "application/json" },
           body: JSON.stringify({
+            preset: "chat",
+            modeId,
+            neuroMode,
+            simpleLanguage: simpleMode || simpleLanguageMode,
             messages: next
               .filter((m) => m.id !== assistantId)
               .map(({ role, content }) => ({ role, content })),
-            systemPrompt: getCombinedSystemPrompt(getMode(modeId), neuroMode, simpleMode || simpleLanguageMode),
             recentMood,
             userName: user?.name,
           }),

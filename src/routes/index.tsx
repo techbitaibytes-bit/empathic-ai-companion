@@ -8,11 +8,13 @@ import { AnimatedBackground } from "@/components/AnimatedBackground";
 export const Route = createFileRoute("/")({
   head: () => ({
     meta: [
-      { title: "EmpathAI — A Safe Space That Sees You" },
-      { name: "description", content: "AI emotional companion for teens. Mood Mirror, healing toolkit, and crisis support. Always private, always available." },
-      { property: "og:title", content: "EmpathAI — Soft Cyber Sanctuary" },
-      { property: "og:description", content: "A private AI wellness sanctuary. Mood mirror, healing toolkit, and crisis support." },
+      { title: "EmpathAI — Private AI Companion for Teen Mental Wellness" },
+      { name: "description", content: "A calm, private AI sanctuary for teens and young adults. Mood Mirror, healing toolkit, and crisis support — always available, never stored on servers." },
+      { property: "og:title", content: "EmpathAI — Private AI Companion for Teen Mental Wellness" },
+      { property: "og:description", content: "A private AI wellness sanctuary with mood mirror, healing toolkit, and crisis support." },
+      { property: "og:url", content: "https://friendlypal.lovable.app/" },
     ],
+    links: [{ rel: "canonical", href: "https://friendlypal.lovable.app/" }],
   }),
   component: Landing,
 });
@@ -77,8 +79,10 @@ function Landing() {
             </div>
           </motion.div>
 
-          <div className="mt-20 grid grid-cols-1 sm:grid-cols-3 gap-4 w-full max-w-5xl">
-            {[
+          <div className="mt-20 w-full max-w-5xl">
+            <h2 className="text-2xl sm:text-3xl font-semibold tracking-tight text-center mb-8">What's inside the sanctuary</h2>
+            <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
+              {[
               { icon: Heart, title: "Six gentle modes", body: "Switch between listener, coach, reflective, and caring support styles without losing the thread of the conversation." },
               { icon: Eye, title: "Mood Mirror", body: "Optional, on-device emotion sensing from your webcam with no uploads and a calm, private readout." },
               { icon: Sparkles, title: "Healing toolkit", body: "Body doubling, task breakdown, grounding, breathing, and soft affirmations built for real moments." },
@@ -97,7 +101,8 @@ function Landing() {
                   <p className="mt-2 text-sm text-muted-foreground leading-relaxed">{b.body}</p>
                 </GlassCard>
               </motion.div>
-            ))}
+              ))}
+            </div>
           </div>
         </section>
 

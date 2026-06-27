@@ -9,7 +9,16 @@ import { AnimatedBackground } from "@/components/AnimatedBackground";
 import { useLocalStorage, STORAGE_KEYS, type MoodEntry } from "@/lib/storage";
 
 export const Route = createFileRoute("/sanctuary/mirror")({
-  head: () => ({ meta: [{ title: "Mood Mirror — EmpathAI Sanctuary" }] }),
+  head: () => ({
+    meta: [
+      { title: "Mood Mirror — On-Device Emotion Sensing | EmpathAI" },
+      { name: "description", content: "Optional webcam-based mood sensing that runs entirely on your device. Nothing is uploaded. A calm, private readout of how you might be feeling." },
+      { property: "og:title", content: "Mood Mirror — On-Device Emotion Sensing | EmpathAI" },
+      { property: "og:description", content: "Private, on-device emotion sensing for teens. No uploads, no tracking." },
+      { property: "og:url", content: "https://friendlypal.lovable.app/sanctuary/mirror" },
+    ],
+    links: [{ rel: "canonical", href: "https://friendlypal.lovable.app/sanctuary/mirror" }],
+  }),
   component: MirrorPage,
 });
 
@@ -91,7 +100,7 @@ function MirrorPage() {
     try {
       let faceapi: any = null;
       try {
-        faceapi = await import("face-api.js");
+        faceapi = await import("@vladmandic/face-api");
       } catch {
         // dynamic import failed; fall back to manual mode
         setModelsAvailable(false);

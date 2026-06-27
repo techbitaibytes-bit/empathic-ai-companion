@@ -91,7 +91,7 @@ function MirrorPage() {
     try {
       let faceapi: any = null;
       try {
-        faceapi = await import("face-api.js");
+        faceapi = await import("@vladmandic/face-api");
       } catch {
         // dynamic import failed; fall back to manual mode
         setModelsAvailable(false);

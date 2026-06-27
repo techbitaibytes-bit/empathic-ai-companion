@@ -1,0 +1,57 @@
+<svg width="1200" height="630" viewBox="0 0 1200 630" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <linearGradient id="bg" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#0d0d1a"/>
+      <stop offset="100%" style="stop-color:#0f0a1e"/>
+    </linearGradient>
+    <radialGradient id="glow1" cx="30%" cy="40%" r="50%">
+      <stop offset="0%" style="stop-color:#6d28d9;stop-opacity:0.3"/>
+      <stop offset="100%" style="stop-color:#6d28d9;stop-opacity:0"/>
+    </radialGradient>
+    <radialGradient id="glow2" cx="75%" cy="60%" r="45%">
+      <stop offset="0%" style="stop-color:#7c3aed;stop-opacity:0.2"/>
+      <stop offset="100%" style="stop-color:#7c3aed;stop-opacity:0"/>
+    </radialGradient>
+  </defs>
+  <!-- Background -->
+  <rect width="1200" height="630" fill="url(#bg)"/>
+  <rect width="1200" height="630" fill="url(#glow1)"/>
+  <rect width="1200" height="630" fill="url(#glow2)"/>
+  <!-- Subtle grid lines -->
+  <g stroke="#ffffff" stroke-opacity="0.03" stroke-width="1">
+    <line x1="0" y1="210" x2="1200" y2="210"/>
+    <line x1="0" y1="420" x2="1200" y2="420"/>
+    <line x1="400" y1="0" x2="400" y2="630"/>
+    <line x1="800" y1="0" x2="800" y2="630"/>
+  </g>
+  <!-- Glowing orb -->
+  <circle cx="180" cy="315" r="90" fill="none" stroke="#8b5cf6" stroke-width="1.5" stroke-opacity="0.4"/>
+  <circle cx="180" cy="315" r="60" fill="none" stroke="#a78bfa" stroke-width="1" stroke-opacity="0.3"/>
+  <circle cx="180" cy="315" r="34" fill="#7c3aed" fill-opacity="0.6"/>
+  <circle cx="180" cy="315" r="20" fill="#8b5cf6" fill-opacity="0.9"/>
+  <!-- Heart icon inside orb -->
+  <path d="M180 323 C180 323 165 312 165 304 C165 299 169 295 174 295 C177 295 179 297 180 298 C181 297 183 295 186 295 C191 295 195 299 195 304 C195 312 180 323 180 323Z" fill="white" fill-opacity="0.9"/>
+  <!-- Main text -->
+  <text x="280" y="270" font-family="-apple-system, BlinkMacSystemFont, 'Inter', sans-serif" font-size="62" font-weight="700" fill="white" letter-spacing="-1">EmpathAI</text>
+  <text x="280" y="330" font-family="-apple-system, BlinkMacSystemFont, 'Inter', sans-serif" font-size="28" font-weight="400" fill="#a78bfa">A Private AI Companion for Teens</text>
+  <!-- Divider -->
+  <line x1="280" y1="360" x2="900" y2="360" stroke="#4c1d95" stroke-width="1.5"/>
+  <!-- Feature pills -->
+  <rect x="280" y="378" width="150" height="36" rx="18" fill="#4c1d95" fill-opacity="0.6"/>
+  <text x="355" y="402" font-family="-apple-system, BlinkMacSystemFont, 'Inter', sans-serif" font-size="15" fill="#c4b5fd" text-anchor="middle">Mood Mirror</text>
+  <rect x="446" y="378" width="170" height="36" rx="18" fill="#4c1d95" fill-opacity="0.6"/>
+  <text x="531" y="402" font-family="-apple-system, BlinkMacSystemFont, 'Inter', sans-serif" font-size="15" fill="#c4b5fd" text-anchor="middle">Healing Toolkit</text>
+  <rect x="632" y="378" width="170" height="36" rx="18" fill="#4c1d95" fill-opacity="0.6"/>
+  <text x="717" y="402" font-family="-apple-system, BlinkMacSystemFont, 'Inter', sans-serif" font-size="15" fill="#c4b5fd" text-anchor="middle">Crisis Support</text>
+  <!-- Bottom tagline -->
+  <text x="280" y="470" font-family="-apple-system, BlinkMacSystemFont, 'Inter', sans-serif" font-size="20" fill="#6d28d9" fill-opacity="0.8">Always private. Always available. Never judged.</text>
+  <!-- URL -->
+  <text x="280" y="510" font-family="-apple-system, BlinkMacSystemFont, 'Inter', sans-serif" font-size="16" fill="#ffffff" fill-opacity="0.3">friendlypal.lovable.app</text>
+  <!-- Stars -->
+  <circle cx="1050" cy="120" r="2" fill="#a78bfa" fill-opacity="0.6"/>
+  <circle cx="1100" cy="200" r="1.5" fill="#a78bfa" fill-opacity="0.4"/>
+  <circle cx="980" cy="80" r="1" fill="#a78bfa" fill-opacity="0.5"/>
+  <circle cx="1130" cy="320" r="2.5" fill="#a78bfa" fill-opacity="0.3"/>
+  <circle cx="1070" cy="450" r="1.5" fill="#a78bfa" fill-opacity="0.4"/>
+  <circle cx="1150" cy="160" r="1" fill="#a78bfa" fill-opacity="0.6"/>
+</svg>
